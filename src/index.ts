@@ -35,6 +35,7 @@ async function startApolloServer() {
   const server = new ApolloServer({
     schema,
   });
+
   await server.start();
 
   app.use(
@@ -44,18 +45,11 @@ async function startApolloServer() {
     })
   );
 
-  app.use("/", (req, res) => {
-    res.send("ok");
-  });
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ path: "/graphql", app });
 
-  await app.listen(PORT, () =>
-    console.log(
-      `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-    )
-  );
+  await app.listen(PORT, () => console.log(`server started`));
 }
 
 startApolloServer();

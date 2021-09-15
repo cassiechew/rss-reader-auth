@@ -50,3 +50,4 @@ typings/
 dist
 .env
 .env.local
+.vercel
