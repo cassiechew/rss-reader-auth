@@ -44,6 +44,9 @@ async function startApolloServer() {
     })
   );
 
+  app.use("/", (req, res) => {
+    res.send("ok");
+  });
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   server.applyMiddleware({ app });
