@@ -34,6 +34,7 @@ async function startApolloServer() {
   const app: Express = express();
   const server = new ApolloServer({
     schema,
+    playground: true,
   });
 
   await server.start();
