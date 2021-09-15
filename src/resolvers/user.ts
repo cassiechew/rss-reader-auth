@@ -29,7 +29,7 @@ export class UserResolver {
               userId: user.id,
             },
           },
-          "randomStringOfMemes",
+          process.env.SECRET,
           { expiresIn: "4h" }
         );
         return new LoginResponse(true, jwtRet);
