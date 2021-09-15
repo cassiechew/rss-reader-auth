@@ -23,13 +23,17 @@ export class UserResolver {
 
     try {
       if (await argon2.verify(user.login.passwordHash, password)) {
+        const secret: string | undefined = process.env.SECRET;
+        if (secret === undefined) {
+          return new LoginResponse();
+        }
         const jwtRet = jwt.sign(
           {
             data: {
               userId: user.id,
             },
           },
-          process.env.SECRET,
+          secret,
           { expiresIn: "4h" }
         );
         return new LoginResponse(true, jwtRet);
